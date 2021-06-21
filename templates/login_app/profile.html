@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title_block %}
+    Profile
+{% endblock title_block %}
+    
+
+
+{% block body_block %}
+
+
+{% if user.user_profile %}
+    <div class="card mb-3 col-md-8 mx-auto text-center">
+        <img src="/media/{{ user.user_profile.profile_pic }}" class="img-fluid mx-auto rounded-circle" alt="Profile picture" style="height: 150px; width: 150px;">
+        <a href="{% url 'login_app:profile_pic_change' %}" class="btn btn-success col-md-3 mx-auto card-link mt-2">Change profile picture</a>
+        <div class="card-body">
+        <h5 class="card-title">{{ user.first_name }} {{ user.last_name }}</h5>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">An item</li>
+            <li class="list-group-item">A second item</li>
+            <li class="list-group-item"><a href="{% url 'login_app:update_profile' %}" class="btn btn-primary card-link"> Edit Profile</a></li>
+        </ul>
+    </div>
+{% else %}
+    <div class="card col-md-6 mx-auto text-center">
+        <img src="/media/profile_pics/default_profile.jpg" class=" img-fluid mx-auto rounded-circle" alt="Profile picture" style="max-height: 200px; max-width: 200px;">
+        <a href=" {% url 'login_app:profile_pic_upload' %}" class="btn btn-success col-md-4 mx-auto ">Add profile picture</a>
+        <div class="card-body">
+        <h5 class="card-title list-group-item">{{ user.first_name }} {{ user.last_name }}</h5>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">An item</li>
+            <li class="list-group-item">A second item</li>
+            <li class="list-group-item"><a href="{% url 'login_app:update_profile' %}" class="btn btn-primary card-link"> Edit Profile Info</a></li>
+        </ul>
+        </div>
+    </div>
+{% endif %}
+{% endblock body_block %}
+    

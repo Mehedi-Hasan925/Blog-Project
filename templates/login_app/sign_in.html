@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block title_block %}
+    Sign In
+{% endblock title_block %}
+
+
+{% block body_block %}
+<div class="container">
+    <h3 class="text-center m-4">Log In</h3>
+    <form method="POST" style="my-auto">
+        {{form|crispy}}
+        {% csrf_token %}
+        <input type="submit" name="submit" value="Sign In" class="form-control btn btn-success mt-4">
+    </form>
+</div>
+    
+        
+        
+{% endblock body_block %}
+    
+    

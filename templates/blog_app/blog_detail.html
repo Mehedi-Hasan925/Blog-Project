@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title_block %}
+    Blog Details
+{% endblock title_block %}
+    
+    
+    
+
+
+{% block body_block %}
+<div class="row">
+    <div class="col-sm-6 mx-auto text-center">
+        <h3>{{ blog.title }}</h3>
+        <h5>Posted By: <a href="">{{ blog.author }}</a></h5>
+        <i><h6 class="mb-1">Published on: {{ blog.publish_time }}</h6></i>
+        <i><h6 class="mb-4">Updated on: {{ blog.updated_date }}</h6></i>
+        <h6>{{ blog.blog_likes.count }} Likes | {{ blog.blog_comments.count }} comments</h6>
+        
+        
+    </div>
+
+    <div class="col-sm-6"><img src="/media/{{ blog.blog_image }}" alt="{{ blog.title }}" title="{{ blog.title }}" class="img-fluid" style="display: block; width: 100% \9; height: auto;"></div>
+
+</div>
+    
+    <div>
+        <p>{{ blog.content|linebreaks }}</p>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-6 text-center">
+            {% if liked %}
+                  <ul class="list-group">
+                    <li class="list-group-item"><a href="{% url 'blog_app:unliked' pk=blog.pk %}" style="text-decoration: none;"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i> Unlike </a></li>
+                </ul>
+            {% else %}
+                  <ul class="list-group">
+                <li class="list-group-item"><a href="{% url 'blog_app:liked' pk=blog.pk %}" style="text-decoration: none;"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Like </a></li>
+                </ul>
+            {% endif %}
+            
+          
+        </div>
+        <div class="col-6 text-center">
+            <ul class="list-group">
+                <li class="list-group-item"><a href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="text-decoration: none;"><i class="fa fa-comment-o" aria-hidden="true"></i> Comment</a></li>
+            </ul>
+        
+
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="staticBackdropLabel">Commnet</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <form method="POST">
+                          {{ comment_form|crispy }}
+                          {% csrf_token %}
+                         <input type="submit" name="submit" value="Comment" class="mt-3 btn btn-success">
+                          
+                      </form>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+        </div>
+    </div>
+    {% for comment in blog.blog_comments.all %}
+    <div class="row">
+            <p><a href="">{{ comment.user_comment }}</a>{{ comment.comment_content }}
+            <h6>{{ comment.comment_date }}</h6></p>
+    </div>
+    {% endfor %}
+   
+{% endblock body_block %}
+    
+    
