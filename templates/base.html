@@ -28,14 +28,22 @@
               </li>
 
               {% if user.is_authenticated %}
+              <li class="nav-item" style="padding-right: 30px;">
+                <a class="nav-link" aria-current="page" href="{% url 'blog_app:create_blog' %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Write Blog</a>
+              </li>
+
+              <li class="nav-item" style="padding-right: 30px;">
+                <a class="nav-link" aria-current="page" href="{% url 'blog_app:my_blog' %}"><i class="fa fa-archive" aria-hidden="true"></i> My Blog</a>
+              </li>
+
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <i class="fa fa-user-circle" aria-hidden="true"></i> {{user.username}}
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-left" aria-labelledby="navbarDarkDropdownMenuLink" style="background: #0e1d3b; color:aliceblue">
                   <li><a class="dropdown-item" href="{% url 'login_app:profile' %}"><i class="fa fa-id-card-o" aria-hidden="true"></i>&nbsp; Profile</a></li>
-                  <li><a class="dropdown-item" href="{% url 'blog_app:create_blog' %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Write Blog</a></li>
-                  <li><a class="dropdown-item" href="{% url 'blog_app:my_blog' %}"><i class="fa fa-archive" aria-hidden="true"></i> My Blogs</a></li>
+                  <!-- <li><a class="dropdown-item" href="{% url 'blog_app:create_blog' %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Write Blog</a></li> -->
+                  <!-- <li><a class="dropdown-item" href="{% url 'blog_app:my_blog' %}"><i class="fa fa-archive" aria-hidden="true"></i> My Blogs</a></li> -->
                   <li><a class="dropdown-item" href="{% url 'login_app:logout' %}"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
                   
                 </ul>
